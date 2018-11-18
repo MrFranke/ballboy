@@ -1,7 +1,7 @@
-import { TEST_STRING } from "./constans";
+import { FILE_CONTENT } from "./constans";
 
 export default {
   readFileSync(path) {
-    return TEST_STRING;
+    return FILE_CONTENT;
   }
 }
