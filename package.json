@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "Simple file fetcher for your nodejs code. Support HTTP(S) and file protocol",
   "keywords": ["nodejs", "download", "http", "https", "file"],
-  "homepage": "https://github.com/MrFranke/bellboy",
+  "homepage": "https://github.com/MrFranke/ballboy",
   "main": "./lib/index.js",
   "engines" : { "node" : ">=10" },
   "repository": {
     "type" : "git",
-    "url" : "https://github.com/MrFranke/bellboy.git"
+    "url" : "https://github.com/MrFranke/ballboy.git"
   },
   "scripts": {
     "build": "babel src/ -d lib/ --source-maps",

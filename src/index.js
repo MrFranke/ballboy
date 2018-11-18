@@ -3,7 +3,7 @@ import fetch from 'node-fetch';
 import fs from 'fs';
 
 
-type Bellhop = (path: string) => Promise<string>;
+type Ballboy = (path: string) => Promise<string>;
 type Downloader = (path: string) => Promise<string>;
 
 const getUrl = (path: string): URL => {
@@ -36,9 +36,9 @@ const download: Downloader = async (url: URL) => {
   }
 };
 
-export const bellboy: Bellhop = (path) => {
+export const ballboy: Ballboy = (path) => {
   const url = getUrl(path);
   return download(url);
 };
 
-export default bellboy;
+export default ballboy;
