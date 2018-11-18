@@ -9,6 +9,8 @@ Supported protocols: `HTTP`, `HTTPS`, `File path`, `file://`.
 ### Example:
 ```js
 const ballboy = require('ballboy');
+const executeConfig = config => console.log(JSON.parse(config));
+
 ballboy('./path/to/config.json').then(executeConfig);
 ballboy('http://config.io/config.json').then(executeConfig);
 ballboy('https://config.io/config.json').then(executeConfig);
