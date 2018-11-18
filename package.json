@@ -17,7 +17,7 @@
     "test": "NODE_ENV=test jest",
     "flow:deps": "flow-typed install"
   },
-  "author": "MrFranke",
+  "author": "mrfranke",
   "license": "ISC",
   "dependencies": {
     "node-fetch": "^2.2.1"
