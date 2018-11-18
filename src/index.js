@@ -3,9 +3,8 @@ import fetch from 'node-fetch';
 import fs from 'fs';
 
 
-type Bellhop = {
-  (specPath: string): Promise<string>;
-};
+type Bellhop = (path: string) => Promise<string>;
+type Downloader = (path: string) => Promise<string>;
 
 const getUrl = (path: string): URL => {
   let url;
@@ -18,16 +17,16 @@ const getUrl = (path: string): URL => {
 };
 
 
-const downloadByHttp = async (path) => {
+const downloadByHttp: Downloader = async (path) => {
   const data = await fetch(path.href);
   return data.text();
 };
 
-const downloadByFile = async (path) => {
+const downloadByFile: Downloader = async (path) => {
   return fs.readFileSync(path.pathname).toString();
 };
 
-const download = async (url: URL) => {
+const download: Downloader = async (url: URL) => {
   switch (url.protocol) {
     case 'http:':
     case 'https:':
@@ -37,7 +36,9 @@ const download = async (url: URL) => {
   }
 };
 
-export const bellhop: Bellhop = (specPath) => {
-  const url = getUrl(specPath);
+export const bellboy: Bellhop = (path) => {
+  const url = getUrl(path);
   return download(url);
 };
+
+export default bellboy;

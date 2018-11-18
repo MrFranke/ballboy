@@ -1,21 +1,26 @@
 {
   "name": "ballboy",
   "version": "1.0.0",
-  "description": "",
+  "description": "Simple file fetcher for your nodejs code. Support HTTP(S) and file protocol",
+  "keywords": ["nodejs", "download", "http", "https", "file"],
+  "homepage": "https://github.com/MrFranke/bellboy",
   "main": "./lib/index.js",
-  "bin": "./lib/scripts/bin.js",
+  "engines" : { "node" : ">=10" },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/MrFranke/bellboy.git"
+  },
   "scripts": {
-    "build": "babel src/ -d lib/",
-    "build:dev": "babel src/ -d lib/ --watch --source-maps",
-    "test": "jest",
+    "build": "babel src/ -d lib/ --source-maps",
+    "build:prod": "NODE_ENV=production npm run build",
+    "build:dev": "NODE_ENV=development npm run build -- --watch",
+    "test": "NODE_ENV=test jest",
     "flow:deps": "flow-typed install"
   },
-  "author": "",
+  "author": "MrFranke",
   "license": "ISC",
   "dependencies": {
-    "commander": "^2.19.0",
-    "node-fetch": "^2.2.1",
-    "swagger-parser": "^6.0.2"
+    "node-fetch": "^2.2.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.5",
