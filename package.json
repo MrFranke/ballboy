@@ -1,6 +1,6 @@
 {
   "name": "ballboy",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple file fetcher for your nodejs code. Support HTTP(S) and file protocol",
   "keywords": ["nodejs", "download", "http", "https", "file"],
   "homepage": "https://github.com/MrFranke/ballboy",
@@ -19,9 +19,7 @@
   },
   "author": "mrfranke",
   "license": "ISC",
-  "dependencies": {
-    "node-fetch": "^2.2.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/cli": "^7.1.5",
     "@babel/core": "^7.1.5",
