@@ -1,7 +1,7 @@
 import { FILE_CONTENT } from "./constans";
 
 export default {
-  readFileSync(path) {
-    return FILE_CONTENT;
+  readFile(path, cb) {
+    cb(null, FILE_CONTENT);
   }
 }

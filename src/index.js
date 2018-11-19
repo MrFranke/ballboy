@@ -32,7 +32,12 @@ const downloadByHttp: Downloader = (url) => {
 };
 
 const downloadByFile: Downloader = async (url) => {
-  return fs.readFileSync(url.pathname).toString();
+  return new Promise((resolve, reject) => {
+    fs.readFile(url.pathname, (err, data) => {
+      if (err) { reject(err); }
+      resolve(data.toString());
+    });
+  });
 };
 
 const download: Downloader = async (url: URL) => {
