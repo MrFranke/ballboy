@@ -17,6 +17,6 @@ ballboy('https://config.io/config.json').then(executeConfig);
 ``` 
 
 ### TODO
-- [ ] Async file load by `fs` module
+- [x] Async file load by `fs` module
 - [ ] Load by FTP
 - [ ] Add node.js streams
