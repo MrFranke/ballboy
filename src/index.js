@@ -1,10 +1,11 @@
 import { pathToFileURL } from 'url';
-import fetch from 'node-fetch';
+import http from 'http';
+import https from 'https';
 import fs from 'fs';
 
 
 type Ballboy = (path: string) => Promise<string>;
-type Downloader = (path: string) => Promise<string>;
+type Downloader = (url: URL) => Promise<string>;
 
 const getUrl = (path: string): URL => {
   let url;
@@ -17,13 +18,21 @@ const getUrl = (path: string): URL => {
 };
 
 
-const downloadByHttp: Downloader = async (path) => {
-  const data = await fetch(path.href);
-  return data.text();
+const downloadByHttp: Downloader = (url) => {
+  const isHttps = url.protocol === 'https:';
+  const agent = isHttps ? https : http;
+  return new Promise((resolve, reject) => {
+    let data = '';
+    agent.get(url.href, (res) => {
+      if (res.statusCode !== 200) { reject(`Status code: ${res.statusCode}`); }
+      res.on('data', (chunk) => { data += chunk; });
+      res.on('end', () => { resolve(data); });
+    });
+  });
 };
 
-const downloadByFile: Downloader = async (path) => {
-  return fs.readFileSync(path.pathname).toString();
+const downloadByFile: Downloader = async (url) => {
+  return fs.readFileSync(url.pathname).toString();
 };
 
 const download: Downloader = async (url: URL) => {
