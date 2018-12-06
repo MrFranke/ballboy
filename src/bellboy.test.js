@@ -4,17 +4,20 @@ jest.mock('http');
 jest.mock('https');
 jest.mock('fs');
 
-test('Download by HTTP', () => {
+test('Download by HTTP', async () => {
   const link = 'http://test.com/';
-  return expect(ballboy(link)).resolves.toEqual(HTTP_CONTENT);
+  const result = await ballboy(link);
+  return expect(result).toEqual(HTTP_CONTENT);
 });
 
-test('Download by HTTPS', () => {
+test('Download by HTTPS', async () => {
   const link = 'https://test.com/';
-  return expect(ballboy(link)).resolves.toEqual(HTTPS_CONTENT);
+  const result = await ballboy(link);
+  return expect(result).toEqual(HTTPS_CONTENT);
 });
 
-test('Download by file', () => {
+test('Download by file', async () => {
   const link = '/path/to/file.yml';
-  return expect(ballboy(link)).resolves.toEqual(FILE_CONTENT);
+  const result = await ballboy(link);
+  return expect(result).toEqual(FILE_CONTENT);
 });

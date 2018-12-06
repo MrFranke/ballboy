@@ -4,8 +4,11 @@ import https from 'https';
 import fs from 'fs';
 
 
-type Ballboy = (path: string) => Promise<string>;
-type Downloader = (url: URL) => Promise<string>;
+type Ballboy = {
+  (path: string): Promise<string>;
+  HTTPConfig: {}
+};
+type Downloader = (url: URL, httpConfig?: {}) => Promise<string>;
 
 const getUrl = (path: string): URL => {
   let url;
@@ -18,14 +21,14 @@ const getUrl = (path: string): URL => {
 };
 
 
-const downloadByHttp: Downloader = (url) => {
+const downloadByHttp: Downloader = (url, httpConfig) => {
   const isHttps = url.protocol === 'https:';
   const agent = isHttps ? https : http;
   return new Promise((resolve, reject) => {
-    let data = new Buffer(0);
-    agent.get(url.href, (res) => {
+    let data = Buffer.from([]);
+    agent.get(url.href, httpConfig, (res) => {
       if (res.statusCode !== 200) { reject(`Error! Status code: ${res.statusCode}`); }
-      res.on('data', (chunk) => { data  = Buffer.concat([data, new Buffer(chunk)]) });
+      res.on('data', (chunk) => { data  = Buffer.concat([data, Buffer.from(chunk)]) });
       res.on('end', () => { resolve(data.toString()); });
     });
   });
@@ -40,11 +43,11 @@ const downloadByFile: Downloader = async (url) => {
   });
 };
 
-const download: Downloader = async (url: URL) => {
+const download: Downloader = async (url, HTTPConfig) => {
   switch (url.protocol) {
     case 'http:':
     case 'https:':
-      return downloadByHttp(url);
+      return downloadByHttp(url, HTTPConfig);
     case 'file:':
       return downloadByFile(url);
   }
@@ -52,7 +55,8 @@ const download: Downloader = async (url: URL) => {
 
 export const ballboy: Ballboy = (path) => {
   const url = getUrl(path);
-  return download(url);
+  const HTTPConfig = ballboy.HTTPConfig || {};
+  return download(url, HTTPConfig);
 };
 
 export default ballboy;

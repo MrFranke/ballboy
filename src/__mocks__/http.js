@@ -8,10 +8,10 @@ class Res {
   on(event, cb) {
     this[event] = cb;
   }
-};
+}
 
 export default {
-  get(url, cb) {
+  get(url, options = {}, cb) {
     const res = new Res();
     cb(res);
     HTTP_CONTENT.split().forEach(letter => res.data(letter));
