@@ -22,11 +22,11 @@ const downloadByHttp: Downloader = (url) => {
   const isHttps = url.protocol === 'https:';
   const agent = isHttps ? https : http;
   return new Promise((resolve, reject) => {
-    let data = '';
+    let data = new Buffer(0);
     agent.get(url.href, (res) => {
-      if (res.statusCode !== 200) { reject(`Status code: ${res.statusCode}`); }
-      res.on('data', (chunk) => { data += chunk; });
-      res.on('end', () => { resolve(data); });
+      if (res.statusCode !== 200) { reject(`Error! Status code: ${res.statusCode}`); }
+      res.on('data', (chunk) => { data  = Buffer.concat([data, new Buffer(chunk)]) });
+      res.on('end', () => { resolve(data.toString()); });
     });
   });
 };
