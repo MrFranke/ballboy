@@ -16,7 +16,13 @@ ballboy('http://config.io/config.json').then(executeConfig);
 ballboy('https://config.io/config.json').then(executeConfig);
 ``` 
 
-### TODO
-- [x] Async file load by `fs` module
-- [ ] Load by FTP
-- [ ] Add node.js streams
+You can pass http config for authentication, headers e.t.c.
+
+```js
+ballboy.HTTPConfig = {
+  headers: {
+    'Authentication': 'Bearer token',
+    'X-Custom-Header': 'foo'
+  }
+}
+```
