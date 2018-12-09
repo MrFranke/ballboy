@@ -21,3 +21,13 @@ test('Download by file', async () => {
   const result = await ballboy(link);
   return expect(result).toEqual(FILE_CONTENT);
 });
+
+test('Check HTTP error', async () => {
+  const link = 'http://path.to/error';
+  try {
+    await ballboy(link)
+  } catch (e) {
+    return expect(e.includes('Error!')).toEqual(true);
+  }
+  return expect(false).toEqual(true);
+});

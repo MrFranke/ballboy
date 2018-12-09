@@ -3,7 +3,6 @@ import http from 'http';
 import https from 'https';
 import fs from 'fs';
 
-
 type Ballboy = {
   (path: string): Promise<string>;
   HTTPConfig: {}
@@ -19,7 +18,6 @@ const getUrl = (path: string): URL => {
   }
   return url;
 };
-
 
 const downloadByHttp: Downloader = (url, httpConfig) => {
   const isHttps = url.protocol === 'https:';

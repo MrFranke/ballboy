@@ -12,7 +12,10 @@ class Res {
 
 export default {
   get(url, options = {}, cb) {
-    const res = new Res();
+    let res = new Res();
+    if (url === 'http://path.to/error') {
+      res = new Res(400);
+    }
     cb(res);
     HTTP_CONTENT.split().forEach(letter => res.data(letter));
     res.end();
