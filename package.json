@@ -1,6 +1,6 @@
 {
   "name": "ballboy",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "Simple file fetcher for your nodejs code. Support HTTP(S) and file protocol",
   "keywords": ["nodejs", "download", "http", "https", "file"],
   "homepage": "https://github.com/MrFranke/ballboy",
