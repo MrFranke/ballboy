@@ -2,7 +2,7 @@
   "name": "ballboy",
   "version": "1.1.0",
   "description": "Simple file fetcher for your nodejs code. Support HTTP(S) and file protocol",
-  "keywords": ["nodejs", "download", "http", "https", "file"],
+  "keywords": ["nodejs", "download", "http", "https", "file", "fetch", "ajax", "flow"],
   "homepage": "https://github.com/MrFranke/ballboy",
   "main": "./lib/index.js",
   "engines" : { "node" : ">=10" },

@@ -36,7 +36,12 @@ const downloadByFile: Downloader = async (url) => {
   return new Promise((resolve, reject) => {
     fs.readFile(url.pathname, (err, data) => {
       if (err) { reject(err); }
-      resolve(data.toString());
+      try {
+        resolve(data.toString());
+      } catch (e) {
+        reject(e);
+      }
+
     });
   });
 };
